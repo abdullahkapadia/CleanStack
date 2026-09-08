@@ -16,7 +16,8 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", "wailsjs"],
+  "include": ["src", "wailsjs/**/*.d.ts"],
+  "exclude": ["wailsjs/**/*.js"],
   "references": [
     {
       "path": "./tsconfig.node.json"

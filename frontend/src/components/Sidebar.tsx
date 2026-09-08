@@ -8,7 +8,7 @@ interface SidebarProps {
 interface NavItem {
     id: Page;
     label: string;
-    icon: JSX.Element;
+    icon: React.ReactNode;
 }
 
 const navItems: NavItem[] = [
