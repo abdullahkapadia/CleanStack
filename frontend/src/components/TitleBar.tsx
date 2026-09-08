@@ -25,10 +25,10 @@ export default function TitleBar({ onSettingsClick }: TitleBarProps) {
     }
 
     return (
-        <div className="flex items-center h-11 bg-surface-raised border-b border-border select-none"
+        <div className="flex items-center h-12 bg-surface border-b border-border select-none"
              style={{ "--wails-draggable": "drag" } as React.CSSProperties}>
 
-            <div className="flex items-center gap-2 pl-4"
+            <div className="flex items-center gap-2 pl-5"
                  style={{ "--wails-draggable": "no-drag" } as React.CSSProperties}>
                 <button onClick={handleClose}
                     className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-90 transition-all" />
@@ -38,12 +38,12 @@ export default function TitleBar({ onSettingsClick }: TitleBarProps) {
                     className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 transition-all" />
             </div>
 
-            <div className="flex-1 text-center text-sm text-text-secondary font-medium">
+            <div className="flex-1 text-center text-[13px] text-text-secondary font-medium tracking-tight">
                 AI Project Cleaner
             </div>
 
             <button onClick={onSettingsClick}
-                className="px-4 h-full flex items-center text-text-muted hover:text-text-secondary transition-colors"
+                className="px-5 h-full flex items-center text-text-muted hover:text-text-secondary transition-colors"
                 style={{ "--wails-draggable": "no-drag" } as React.CSSProperties}>
                 <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
                     <circle cx="8" cy="8" r="2.5" />

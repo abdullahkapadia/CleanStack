@@ -54,9 +54,9 @@ export default function App() {
             <TitleBar onSettingsClick={() => setActivePage("settings")} />
 
             {error && (
-                <div className="mx-4 mt-2 px-4 py-2.5 bg-danger/10 border border-danger/20 rounded-md flex items-center justify-between">
-                    <span className="text-sm text-danger">{error}</span>
-                    <button onClick={() => setError(null)} className="text-danger/60 hover:text-danger text-sm ml-4">
+                <div className="mx-5 mt-3 px-4 py-3 bg-danger-subtle border border-danger/15 rounded-lg flex items-center justify-between">
+                    <span className="text-sm text-danger font-medium">{error}</span>
+                    <button onClick={() => setError(null)} className="text-danger/50 hover:text-danger text-sm ml-4">
                         ✕
                     </button>
                 </div>

@@ -17,10 +17,10 @@ const navItems: NavItem[] = [
         label: "Dashboard",
         icon: (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="5.5" height="5.5" rx="1" />
-                <rect x="10.5" y="2" width="5.5" height="5.5" rx="1" />
-                <rect x="2" y="10.5" width="5.5" height="5.5" rx="1" />
-                <rect x="10.5" y="10.5" width="5.5" height="5.5" rx="1" />
+                <rect x="2" y="2" width="5.5" height="5.5" rx="1.5" />
+                <rect x="10.5" y="2" width="5.5" height="5.5" rx="1.5" />
+                <rect x="2" y="10.5" width="5.5" height="5.5" rx="1.5" />
+                <rect x="10.5" y="10.5" width="5.5" height="5.5" rx="1.5" />
             </svg>
         ),
     },
@@ -29,7 +29,7 @@ const navItems: NavItem[] = [
         label: "Projects",
         icon: (
             <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 5.5L2 14a1.5 1.5 0 001.5 1.5h11A1.5 1.5 0 0016 14V7a1.5 1.5 0 00-1.5-1.5H9L7.5 3.5H3.5A1.5 1.5 0 002 5z" />
+                <path d="M2 5.5V14a1.5 1.5 0 001.5 1.5h11A1.5 1.5 0 0016 14V7a1.5 1.5 0 00-1.5-1.5H9L7.5 3.5H3.5A1.5 1.5 0 002 5z" />
             </svg>
         ),
     },
@@ -67,17 +67,20 @@ const navItems: NavItem[] = [
 
 export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
     return (
-        <div className="w-52 bg-surface-raised border-r border-border flex flex-col">
-            <nav className="flex-1 py-3 px-2 space-y-0.5">
+        <div className="w-56 bg-surface-raised border-r border-border flex flex-col py-4 px-3">
+            <span className="text-[10px] font-semibold uppercase tracking-widest text-text-muted px-3 mb-3">
+                Navigation
+            </span>
+            <nav className="flex-1 space-y-1">
                 {navItems.map((item) => {
                     const isActive = activePage === item.id;
                     return (
                         <button
                             key={item.id}
                             onClick={() => onNavigate(item.id)}
-                            className={`w-full flex items-center gap-3 px-3 py-2 rounded-md text-sm font-medium transition-colors
+                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-all
                                 ${isActive
-                                    ? "bg-accent-subtle text-accent"
+                                    ? "bg-accent text-white shadow-sm"
                                     : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
                                 }`}
                         >
