@@ -64,3 +64,5 @@ The built executable will be in the `build/bin/` directory.
 - ✗ Cleanup
 - ✗ File deletion
 - ✗ Git analysis
+
+Additional features will be implemented in the future.
