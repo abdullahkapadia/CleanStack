@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Page, Project } from "./types";
+import { Page, Project, ScanResult } from "./types";
 import TitleBar from "./components/TitleBar";
 import Sidebar from "./components/Sidebar";
 import StatusBar from "./components/StatusBar";
@@ -13,6 +13,7 @@ import SettingsPage from "./pages/SettingsPage";
 export default function App() {
     const [activePage, setActivePage] = useState<Page>("dashboard");
     const [project, setProject] = useState<Project | null>(null);
+    const [scanResult, setScanResult] = useState<ScanResult | null>(null);
     const [error, setError] = useState<string | null>(null);
 
     function handleError(message: string) {
@@ -22,17 +23,57 @@ export default function App() {
 
     function handleProjectSelected(p: Project) {
         setProject(p);
+        setScanResult(null);
         setError(null);
+    }
+
+    function handleNavigateToScan() {
+        setActivePage("scan");
+    }
+
+    function handleScanComplete(result: ScanResult) {
+        setScanResult(result);
+    }
+
+    function getStatus() {
+        if (scanResult) {
+            return `Project: ${project?.name} — ${scanResult.cleanableCount} issues found`;
+        }
+        if (project) {
+            return `Project: ${project.name}`;
+        }
+        return "Ready";
     }
 
     function renderPage() {
         switch (activePage) {
             case "dashboard":
-                return <Dashboard project={project} onProjectSelected={handleProjectSelected} onError={handleError} />;
+                return (
+                    <Dashboard
+                        project={project}
+                        scanResult={scanResult}
+                        onProjectSelected={handleProjectSelected}
+                        onNavigateToScan={handleNavigateToScan}
+                        onError={handleError}
+                    />
+                );
             case "projects":
-                return <ProjectsPage project={project} onProjectSelected={handleProjectSelected} onError={handleError} />;
+                return (
+                    <ProjectsPage
+                        project={project}
+                        onProjectSelected={handleProjectSelected}
+                        onError={handleError}
+                    />
+                );
             case "scan":
-                return <ScanPage />;
+                return (
+                    <ScanPage
+                        project={project}
+                        scanResult={scanResult}
+                        onScanComplete={handleScanComplete}
+                        onError={handleError}
+                    />
+                );
             case "cleanup":
                 return <CleanupPage />;
             case "history":
@@ -40,13 +81,6 @@ export default function App() {
             case "settings":
                 return <SettingsPage />;
         }
-    }
-
-    function getStatus() {
-        if (project) {
-            return `Project: ${project.name}`;
-        }
-        return "Ready";
     }
 
     return (

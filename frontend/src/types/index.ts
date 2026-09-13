@@ -4,3 +4,33 @@ export interface Project {
 }
 
 export type Page = "dashboard" | "projects" | "scan" | "cleanup" | "history" | "settings";
+
+export interface FileIssue {
+    path: string;
+    relPath: string;
+    size: number;
+    category: string;
+    description: string;
+}
+
+export interface CategorySummary {
+    category: string;
+    label: string;
+    fileCount: number;
+    totalSize: number;
+    description: string;
+}
+
+export interface ScanResult {
+    projectPath: string;
+    projectName: string;
+    totalFiles: number;
+    totalDirs: number;
+    totalSize: number;
+    issues: FileIssue[];
+    categories: CategorySummary[];
+    scannedAt: string;
+    scanDurationMs: number;
+    cleanableSize: number;
+    cleanableCount: number;
+}

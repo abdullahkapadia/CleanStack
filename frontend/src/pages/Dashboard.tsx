@@ -1,13 +1,17 @@
-import { Project } from "../types";
+import { Project, ScanResult } from "../types";
 import { SelectProject } from "../../wailsjs/go/main/App";
+import { formatSize, categoryColor } from "../utils/format";
+import Accordion from "../components/Accordion";
 
 interface DashboardProps {
     project: Project | null;
+    scanResult: ScanResult | null;
     onProjectSelected: (project: Project) => void;
+    onNavigateToScan: () => void;
     onError: (message: string) => void;
 }
 
-export default function Dashboard({ project, onProjectSelected, onError }: DashboardProps) {
+export default function Dashboard({ project, scanResult, onProjectSelected, onNavigateToScan, onError }: DashboardProps) {
     async function handleSelectProject() {
         try {
             const result = await SelectProject();
@@ -20,87 +24,143 @@ export default function Dashboard({ project, onProjectSelected, onError }: Dashb
     }
 
     return (
-        <div className="p-10 h-full overflow-y-auto">
-            <div className="mb-10">
-                <h1 className="text-2xl font-bold text-text-primary tracking-tight">
+        <div className="p-8 lg:p-10 h-full overflow-y-auto relative">
+            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+            
+            <div className="mb-8 animate-fade-in relative z-10">
+                <h1 className="text-[22px] font-bold text-text-primary tracking-tight leading-tight">
                     AI Project Cleaner
                 </h1>
-                <p className="text-sm text-text-secondary mt-2 leading-relaxed">
+                <p className="text-[13px] text-text-secondary mt-1.5">
                     Keep your projects clean, safe, and healthy.
                 </p>
             </div>
 
             {!project ? (
-                <div className="border border-border rounded-xl bg-surface p-10 max-w-xl shadow-sm">
-                    <div className="flex items-start gap-4 mb-6">
-                        <div className="w-11 h-11 rounded-xl bg-surface-overlay flex items-center justify-center flex-shrink-0">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" stroke="currentColor" strokeWidth="1.5" className="text-text-muted">
-                                <path d="M2 7V17a2.5 2.5 0 002.5 2.5h13A2.5 2.5 0 0020 17V9.5A2.5 2.5 0 0017.5 7H12L10 4.5H4.5A2.5 2.5 0 002 7z" strokeLinecap="round" strokeLinejoin="round" />
+                <div className="animate-fade-in glass-panel rounded-2xl p-8 max-w-md relative z-10">
+                    <div className="flex items-start gap-3.5 mb-5">
+                        <div className="w-10 h-10 rounded-xl bg-surface-overlay flex items-center justify-center flex-shrink-0">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.3" className="text-text-muted">
+                                <path d="M2 6.5V16a2 2 0 002 2h12a2 2 0 002-2V8.5a2 2 0 00-2-2h-5.5L9 4.5H4a2 2 0 00-2 2z" strokeLinecap="round" strokeLinejoin="round" />
                             </svg>
                         </div>
-                        <div>
-                            <h2 className="text-base font-semibold text-text-primary">
+                        <div className="pt-0.5">
+                            <h2 className="text-[14px] font-semibold text-text-primary leading-snug">
                                 No project selected
                             </h2>
-                            <p className="text-sm text-text-muted mt-1 leading-relaxed">
+                            <p className="text-[12.5px] text-text-muted mt-0.5 leading-relaxed">
                                 Choose a local project directory to get started.
                             </p>
                         </div>
                     </div>
                     <button
                         onClick={handleSelectProject}
-                        className="px-5 py-2.5 bg-accent hover:bg-accent-hover text-white text-sm font-medium rounded-lg transition-colors shadow-sm"
+                        className="px-4 py-2 bg-accent hover:bg-accent-hover active:scale-95 text-white text-[13px] font-medium rounded-lg transition-all duration-150 shadow-[0_1px_2px_rgba(79,125,249,0.25)] hover:shadow-[0_4px_12px_rgba(79,125,249,0.3)]"
                     >
                         Select Project
                     </button>
                 </div>
             ) : (
-                <div className="border border-border rounded-xl bg-surface max-w-xl shadow-sm overflow-hidden">
-                    <div className="px-8 py-6 border-b border-border">
-                        <span className="text-[10px] font-bold uppercase tracking-widest text-text-muted">
-                            Project
-                        </span>
-                        <h2 className="text-xl font-bold text-text-primary mt-2 tracking-tight">
-                            {project.name}
-                        </h2>
-                    </div>
-
-                    <div className="px-8 py-6 space-y-5">
-                        <div>
-                            <span className="text-[11px] font-semibold uppercase tracking-wider text-text-muted block mb-1.5">
-                                Location
+                <div className="space-y-4 max-w-lg animate-fade-in relative z-10">
+                    <div className="glass-panel rounded-2xl overflow-hidden">
+                        <div className="px-6 py-5 border-b border-border/50 bg-surface/30">
+                            <span className="text-[9.5px] font-bold uppercase tracking-[0.14em] text-text-muted/60">
+                                Project
                             </span>
-                            <span className="text-sm text-text-secondary font-mono bg-surface-overlay px-3 py-1.5 rounded-md inline-block">
-                                {project.path}
-                            </span>
+                            <h2 className="text-[18px] font-bold text-text-primary mt-1 tracking-tight">
+                                {project.name}
+                            </h2>
                         </div>
 
-                        <div>
-                            <span className="text-[11px] font-semibold uppercase tracking-wider text-text-muted block mb-1.5">
-                                Status
-                            </span>
-                            <span className="inline-flex items-center gap-2 text-sm text-success bg-success-subtle px-3 py-1.5 rounded-md font-medium">
-                                <span className="w-2 h-2 rounded-full bg-success" />
-                                Ready to scan
-                            </span>
+                        <div className="px-6 py-5 space-y-4">
+                            <div>
+                                <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-text-muted/60 block mb-1">
+                                    Location
+                                </span>
+                                <code className="text-[12px] text-text-secondary font-mono bg-surface-overlay/80 px-2.5 py-1 rounded-md inline-block border border-border/30">
+                                    {project.path}
+                                </code>
+                            </div>
+
+                            <div>
+                                <span className="text-[10px] font-semibold uppercase tracking-[0.1em] text-text-muted/60 block mb-1">
+                                    Status
+                                </span>
+                                {scanResult ? (
+                                    <span className="inline-flex items-center gap-1.5 text-[12px] text-accent bg-accent-subtle px-2.5 py-1.5 rounded-md font-medium border border-accent/10 shadow-sm">
+                                        <span className="w-[6px] h-[6px] rounded-full bg-accent shadow-[0_0_4px_rgba(79,125,249,0.5)]" />
+                                        Scanned — {scanResult.cleanableCount} issues
+                                    </span>
+                                ) : (
+                                    <span className="inline-flex items-center gap-1.5 text-[12px] text-success bg-success-subtle px-2.5 py-1.5 rounded-md font-medium border border-success/10 shadow-sm">
+                                        <span className="w-[6px] h-[6px] rounded-full bg-success shadow-[0_0_4px_rgba(52,199,114,0.5)]" />
+                                        Ready to scan
+                                    </span>
+                                )}
+                            </div>
+                        </div>
+
+                        <div className="px-6 py-4 border-t border-border/40 flex items-center gap-2.5 bg-surface/40">
+                            <button
+                                onClick={onNavigateToScan}
+                                className="px-4 py-2 bg-accent hover:bg-accent-hover active:scale-95 text-white text-[13px] font-medium rounded-lg transition-all duration-150 shadow-[0_1px_2px_rgba(79,125,249,0.25)]"
+                            >
+                                {scanResult ? "View Results" : "Scan Project"}
+                            </button>
+                            <button
+                                onClick={handleSelectProject}
+                                className="px-4 py-2 border border-border/70 text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 text-[13px] font-medium rounded-lg transition-all duration-150"
+                            >
+                                Change
+                            </button>
                         </div>
                     </div>
 
-                    <div className="px-8 py-5 border-t border-border flex items-center gap-3 bg-surface-raised">
-                        <button
-                            disabled
-                            className="px-5 py-2.5 bg-surface-overlay text-text-muted text-sm font-medium rounded-lg cursor-not-allowed"
-                            title="Project scanning will be available in Phase 2"
+                    {scanResult && scanResult.categories.length > 0 && (
+                        <Accordion 
+                            title={
+                                <div className="flex items-center gap-2">
+                                    <span className="text-[13px]">Scan Summary</span>
+                                    <span className="text-[10px] px-2 py-0.5 rounded-full bg-accent-subtle text-accent font-bold">
+                                        {formatSize(scanResult.cleanableSize)} cleanable
+                                    </span>
+                                </div>
+                            }
+                            defaultExpanded={true}
+                            className="border-none shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05),0_1px_4px_-1px_rgba(0,0,0,0.03)]"
                         >
-                            Scan Project
-                        </button>
-                        <button
-                            onClick={handleSelectProject}
-                            className="px-5 py-2.5 border border-border text-text-secondary hover:text-text-primary hover:border-text-muted text-sm font-medium rounded-lg transition-colors"
-                        >
-                            Change Project
-                        </button>
-                    </div>
+                            <div className="px-6 py-5 bg-surface/30">
+                                <div className="grid grid-cols-3 gap-3 mb-5">
+                                    {[
+                                        { label: "Files", value: scanResult.totalFiles.toLocaleString() },
+                                        { label: "Issues", value: String(scanResult.cleanableCount), accent: true },
+                                        { label: "Cleanable", value: formatSize(scanResult.cleanableSize), accent: true },
+                                    ].map((item) => (
+                                        <div key={item.label} className="bg-surface-raised rounded-xl px-3.5 py-3 border border-border/30 shadow-sm">
+                                            <span className="text-[9.5px] font-semibold uppercase tracking-[0.1em] text-text-muted/60 block">{item.label}</span>
+                                            <span className={`text-[16px] font-bold tracking-tight ${item.accent ? "text-accent drop-shadow-sm" : "text-text-primary"}`}>{item.value}</span>
+                                        </div>
+                                    ))}
+                                </div>
+                                <div className="space-y-2">
+                                    {scanResult.categories.map(cat => (
+                                        <div key={cat.category} className="flex items-center justify-between py-1.5 text-[12px] group">
+                                            <div className="flex items-center gap-2">
+                                                <span 
+                                                    className="w-2 h-2 rounded-full" 
+                                                    style={{ backgroundColor: categoryColor(cat.category) }}
+                                                />
+                                                <span className="text-text-secondary group-hover:text-text-primary transition-colors">{cat.label}</span>
+                                            </div>
+                                            <span className="text-text-muted font-mono text-[11px] group-hover:text-text-secondary transition-colors">
+                                                {cat.fileCount} · {formatSize(cat.totalSize)}
+                                            </span>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+                        </Accordion>
+                    )}
                 </div>
             )}
         </div>

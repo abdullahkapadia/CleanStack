@@ -25,29 +25,40 @@ export default function TitleBar({ onSettingsClick }: TitleBarProps) {
     }
 
     return (
-        <div className="flex items-center h-12 bg-surface border-b border-border select-none"
-             style={{ "--wails-draggable": "drag" } as React.CSSProperties}>
-
-            <div className="flex items-center gap-2 pl-5"
-                 style={{ "--wails-draggable": "no-drag" } as React.CSSProperties}>
-                <button onClick={handleClose}
-                    className="w-3 h-3 rounded-full bg-[#ff5f57] hover:brightness-90 transition-all" />
-                <button onClick={handleMinimize}
-                    className="w-3 h-3 rounded-full bg-[#febc2e] hover:brightness-90 transition-all" />
-                <button onClick={handleMaximize}
-                    className="w-3 h-3 rounded-full bg-[#28c840] hover:brightness-90 transition-all" />
+        <div
+            className="flex items-center h-[46px] bg-surface-raised border-b border-border/60 select-none shrink-0"
+            style={{ "--wails-draggable": "drag" } as React.CSSProperties}
+        >
+            <div
+                className="flex items-center gap-[7px] pl-[18px]"
+                style={{ "--wails-draggable": "no-drag" } as React.CSSProperties}
+            >
+                <button
+                    onClick={handleClose}
+                    className="w-[12px] h-[12px] rounded-full bg-[#ff5f57] hover:bg-[#e04a42] transition-colors duration-150 focus:outline-none"
+                />
+                <button
+                    onClick={handleMinimize}
+                    className="w-[12px] h-[12px] rounded-full bg-[#febc2e] hover:bg-[#e0a520] transition-colors duration-150 focus:outline-none"
+                />
+                <button
+                    onClick={handleMaximize}
+                    className="w-[12px] h-[12px] rounded-full bg-[#28c840] hover:bg-[#1fad34] transition-colors duration-150 focus:outline-none"
+                />
             </div>
 
-            <div className="flex-1 text-center text-[13px] text-text-secondary font-medium tracking-tight">
+            <div className="flex-1 text-center text-[12.5px] text-text-muted font-medium tracking-wide">
                 AI Project Cleaner
             </div>
 
-            <button onClick={onSettingsClick}
-                className="px-5 h-full flex items-center text-text-muted hover:text-text-secondary transition-colors"
-                style={{ "--wails-draggable": "no-drag" } as React.CSSProperties}>
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.5">
-                    <circle cx="8" cy="8" r="2.5" />
-                    <path d="M8 1.5v1.2M8 13.3v1.2M1.5 8h1.2M13.3 8h1.2M3.4 3.4l.85.85M11.75 11.75l.85.85M3.4 12.6l.85-.85M11.75 4.25l.85-.85" />
+            <button
+                onClick={onSettingsClick}
+                className="w-[46px] h-full flex items-center justify-center text-text-muted hover:text-text-secondary hover:bg-surface-hover transition-all duration-150 focus:outline-none"
+                style={{ "--wails-draggable": "no-drag" } as React.CSSProperties}
+            >
+                <svg width="15" height="15" viewBox="0 0 15 15" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round">
+                    <circle cx="7.5" cy="7.5" r="2.2" />
+                    <path d="M7.5 1.5v1M7.5 12.5v1M1.5 7.5h1M12.5 7.5h1M3.3 3.3l.7.7M11 11l.7.7M3.3 11.7l.7-.7M11 4l.7-.7" />
                 </svg>
             </button>
         </div>

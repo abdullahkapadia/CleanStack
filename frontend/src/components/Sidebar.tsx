@@ -16,11 +16,11 @@ const navItems: NavItem[] = [
         id: "dashboard",
         label: "Dashboard",
         icon: (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <rect x="2" y="2" width="5.5" height="5.5" rx="1.5" />
-                <rect x="10.5" y="2" width="5.5" height="5.5" rx="1.5" />
-                <rect x="2" y="10.5" width="5.5" height="5.5" rx="1.5" />
-                <rect x="10.5" y="10.5" width="5.5" height="5.5" rx="1.5" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <rect x="2" y="2" width="4.8" height="4.8" rx="1.2" />
+                <rect x="9.2" y="2" width="4.8" height="4.8" rx="1.2" />
+                <rect x="2" y="9.2" width="4.8" height="4.8" rx="1.2" />
+                <rect x="9.2" y="9.2" width="4.8" height="4.8" rx="1.2" />
             </svg>
         ),
     },
@@ -28,8 +28,8 @@ const navItems: NavItem[] = [
         id: "projects",
         label: "Projects",
         icon: (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M2 5.5V14a1.5 1.5 0 001.5 1.5h11A1.5 1.5 0 0016 14V7a1.5 1.5 0 00-1.5-1.5H9L7.5 3.5H3.5A1.5 1.5 0 002 5z" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M2 5V13a1.5 1.5 0 001.5 1.5h9A1.5 1.5 0 0014 13V6.5A1.5 1.5 0 0012.5 5H8L6.5 3H3.5A1.5 1.5 0 002 4.5z" />
             </svg>
         ),
     },
@@ -37,9 +37,9 @@ const navItems: NavItem[] = [
         id: "scan",
         label: "Scan",
         icon: (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="8" cy="8" r="5.5" />
-                <path d="M13 13l3 3" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="7" cy="7" r="4.5" />
+                <path d="M11 11l3 3" />
             </svg>
         ),
     },
@@ -47,9 +47,9 @@ const navItems: NavItem[] = [
         id: "cleanup",
         label: "Cleanup",
         icon: (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 5h12M6 5V3.5a1 1 0 011-1h4a1 1 0 011 1V5M7.5 8v5M10.5 8v5" />
-                <path d="M4 5l.7 9.5a1.5 1.5 0 001.5 1.5h5.6a1.5 1.5 0 001.5-1.5L14 5" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 5h10M5.5 5V3.5a.8.8 0 01.8-.8h3.4a.8.8 0 01.8.8V5M6.5 7.5v4M9.5 7.5v4" />
+                <path d="M3.8 5l.5 8a1.5 1.5 0 001.5 1.4h4.4a1.5 1.5 0 001.5-1.4l.5-8" />
             </svg>
         ),
     },
@@ -57,9 +57,9 @@ const navItems: NavItem[] = [
         id: "history",
         label: "History",
         icon: (
-            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="9" cy="9" r="7" />
-                <path d="M9 5v4l2.5 2.5" />
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="8" cy="8" r="6" />
+                <path d="M8 4.5v3.5l2.2 2.2" />
             </svg>
         ),
     },
@@ -67,29 +67,35 @@ const navItems: NavItem[] = [
 
 export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
     return (
-        <div className="w-56 bg-surface-raised border-r border-border flex flex-col py-4 px-3">
-            <span className="text-[10px] font-semibold uppercase tracking-widest text-text-muted px-3 mb-3">
-                Navigation
-            </span>
-            <nav className="flex-1 space-y-1">
-                {navItems.map((item) => {
+        <aside className="w-[200px] min-w-[200px] bg-surface-raised border-r border-border/60 flex flex-col shrink-0">
+            <div className="px-4 pt-5 pb-2">
+                <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted/70">
+                    Menu
+                </span>
+            </div>
+            <nav className="flex-1 px-2.5 space-y-[2px]">
+                {navItems.map((item, idx) => {
                     const isActive = activePage === item.id;
                     return (
                         <button
                             key={item.id}
                             onClick={() => onNavigate(item.id)}
-                            className={`w-full flex items-center gap-3 px-3 py-2.5 rounded-lg text-[13px] font-medium transition-all
+                            className={`w-full flex items-center gap-2.5 px-3 py-[7px] rounded-[8px] text-[13px] font-medium transition-all duration-150 focus:outline-none animate-slide-in
                                 ${isActive
-                                    ? "bg-accent text-white shadow-sm"
+                                    ? "bg-accent text-white shadow-[0_1px_3px_rgba(79,125,249,0.3)]"
                                     : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
                                 }`}
+                            style={{ animationDelay: `${idx * 30}ms` }}
                         >
-                            {item.icon}
+                            <span className={isActive ? "opacity-100" : "opacity-60"}>{item.icon}</span>
                             {item.label}
                         </button>
                     );
                 })}
             </nav>
-        </div>
+            <div className="px-4 py-4 border-t border-border/40">
+                <span className="text-[10px] text-text-muted/50 font-medium">v1.0.0-alpha</span>
+            </div>
+        </aside>
     );
 }

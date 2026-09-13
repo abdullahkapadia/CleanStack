@@ -2,9 +2,13 @@
 
 Desktop application that analyzes software projects to identify unnecessary files, potential security issues, unused dependencies, and other project-health problems.
 
-## Phase 1
+## Phase 1 — Foundation
 
-Desktop application foundation and project selection.
+Desktop application shell, layout, navigation, and native project directory selection.
+
+## Phase 2 — Project Scanning
+
+Scan selected project directories to identify build artifacts, cache files, log files, OS junk, large files, and temporary files. Displays categorized results with file sizes.
 
 ## Stack
 
@@ -53,14 +57,17 @@ The built executable will be in the `build/bin/` directory.
 - ✓ Navigation
 - ✓ Native project directory selection
 - ✓ Selected project display
+- ✓ Project scanning (build artifacts, caches, logs, OS junk, large files, temp files)
+- ✓ Scan results with summary cards and categorized issue table
+- ✓ Category filtering
+- ✓ Re-scan support
 - ✓ Basic error handling
 
 ## Not Implemented Yet
 
-- ✗ Project scanning
 - ✗ AI analysis
 - ✗ Security analysis
 - ✗ Dependency analysis
-- ✗ Cleanup
-- ✗ File deletion
+- ✗ Cleanup / file deletion
 - ✗ Git analysis
+- ✗ Scan history persistence

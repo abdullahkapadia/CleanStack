@@ -2,7 +2,10 @@ package main
 
 import (
 	"context"
+	"errors"
 	"path/filepath"
+
+	"ai-project-cleaner/internal/scanner"
 
 	"github.com/wailsapp/wails/v2/pkg/runtime"
 )
@@ -39,4 +42,12 @@ func (a *App) SelectProject() (map[string]string, error) {
 	}
 
 	return result, nil
+}
+
+func (a *App) ScanProject(projectPath string) (scanner.ScanResult, error) {
+	if projectPath == "" {
+		return scanner.ScanResult{}, errors.New("no project path provided")
+	}
+
+	return scanner.ScanProject(projectPath)
 }
