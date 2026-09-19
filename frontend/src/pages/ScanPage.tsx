@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Project, ScanResult } from "../types";
-import { ScanProject } from "../../wailsjs/go/main/App";
+import { ScanProject, GetAIInsights } from "../../wailsjs/go/main/App";
 import { formatSize, formatDuration, categoryIcon, categoryColor } from "../utils/format";
 import Accordion from "../components/Accordion";
 
@@ -14,6 +14,15 @@ interface ScanPageProps {
 export default function ScanPage({ project, scanResult, onScanComplete, onError }: ScanPageProps) {
     const [scanning, setScanning] = useState(false);
     const [activeCategory, setActiveCategory] = useState<string | null>(null);
+    const [aiInsight, setAiInsight] = useState<string | null>(null);
+
+    useEffect(() => {
+        if (scanResult) {
+            GetAIInsights(scanResult as any).then(setAiInsight).catch(console.error);
+        } else {
+            setAiInsight(null);
+        }
+    }, [scanResult]);
 
     async function handleScan() {
         if (!project) return;
@@ -126,6 +135,24 @@ export default function ScanPage({ project, scanResult, onScanComplete, onError 
                     </div>
                 ))}
             </div>
+
+            {aiInsight && (
+                <div className="mb-6 max-w-4xl animate-fade-in relative z-10" style={{ animationDelay: "75ms" }}>
+                    <div className="glass-panel rounded-2xl p-5 border-l-4 border-l-accent shadow-[0_2px_10px_-2px_rgba(79,125,249,0.15)] bg-gradient-to-r from-accent/5 to-transparent">
+                        <div className="flex items-start gap-3">
+                            <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 text-accent">
+                                ✨
+                            </div>
+                            <div>
+                                <h3 className="text-[13px] font-bold text-text-primary mb-1">AI Insight</h3>
+                                <div className="text-[12.5px] text-text-secondary leading-relaxed whitespace-pre-wrap">
+                                    {aiInsight}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
 
             {scanResult.categories.length === 0 ? (
                 <div className="border border-border/60 border-dashed rounded-2xl p-10 flex flex-col items-center justify-center max-w-4xl animate-fade-in">

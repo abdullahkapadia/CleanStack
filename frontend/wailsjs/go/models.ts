@@ -1,3 +1,30 @@
+export namespace history {
+	
+	export class ActionHistory {
+	    id: string;
+	    actionType: string;
+	    projectName: string;
+	    projectPath: string;
+	    details: string;
+	    timestamp: string;
+	
+	    static createFrom(source: any = {}) {
+	        return new ActionHistory(source);
+	    }
+	
+	    constructor(source: any = {}) {
+	        if ('string' === typeof source) source = JSON.parse(source);
+	        this.id = source["id"];
+	        this.actionType = source["actionType"];
+	        this.projectName = source["projectName"];
+	        this.projectPath = source["projectPath"];
+	        this.details = source["details"];
+	        this.timestamp = source["timestamp"];
+	    }
+	}
+
+}
+
 export namespace scanner {
 	
 	export class CategorySummary {

@@ -1,9 +1,9 @@
+export type Page = "dashboard" | "projects" | "scan" | "cleanup" | "history" | "settings";
+
 export interface Project {
     name: string;
     path: string;
 }
-
-export type Page = "dashboard" | "projects" | "scan" | "cleanup" | "history" | "settings";
 
 export interface FileIssue {
     path: string;
@@ -33,4 +33,13 @@ export interface ScanResult {
     scanDurationMs: number;
     cleanableSize: number;
     cleanableCount: number;
+}
+
+export interface ActionHistory {
+    id: string;
+    actionType: string;
+    projectName: string;
+    projectPath: string;
+    details: string;
+    timestamp: string;
 }

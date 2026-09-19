@@ -75,7 +75,16 @@ export default function App() {
                     />
                 );
             case "cleanup":
-                return <CleanupPage />;
+                return (
+                    <CleanupPage 
+                        project={project}
+                        scanResult={scanResult}
+                        onCleanupComplete={() => {
+                            setScanResult(null);
+                        }}
+                        onError={handleError}
+                    />
+                );
             case "history":
                 return <HistoryPage />;
             case "settings":
