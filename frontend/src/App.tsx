@@ -15,6 +15,7 @@ export default function App() {
     const [project, setProject] = useState<Project | null>(null);
     const [scanResult, setScanResult] = useState<ScanResult | null>(null);
     const [error, setError] = useState<string | null>(null);
+    const [isSidebarOpen, setIsSidebarOpen] = useState<boolean>(true);
 
     function handleError(message: string) {
         setError(message);
@@ -94,7 +95,11 @@ export default function App() {
 
     return (
         <div className="h-full flex flex-col bg-surface">
-            <TitleBar onSettingsClick={() => setActivePage("settings")} />
+            <TitleBar 
+                onSettingsClick={() => setActivePage("settings")} 
+                onToggleSidebar={() => setIsSidebarOpen(!isSidebarOpen)}
+                isSidebarOpen={isSidebarOpen}
+            />
 
             {error && (
                 <div className="mx-5 mt-3 px-4 py-3 bg-danger-subtle border border-danger/15 rounded-lg flex items-center justify-between">
@@ -105,9 +110,13 @@ export default function App() {
                 </div>
             )}
 
-            <div className="flex flex-1 overflow-hidden">
-                <Sidebar activePage={activePage} onNavigate={setActivePage} />
-                <main className="flex-1 overflow-hidden">
+            <div className="flex flex-1 overflow-hidden relative">
+                <Sidebar 
+                    activePage={activePage} 
+                    onNavigate={setActivePage} 
+                    isOpen={isSidebarOpen} 
+                />
+                <main className="flex-1 overflow-hidden relative">
                     {renderPage()}
                 </main>
             </div>

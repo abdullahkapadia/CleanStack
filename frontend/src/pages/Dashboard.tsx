@@ -24,11 +24,9 @@ export default function Dashboard({ project, scanResult, onProjectSelected, onNa
     }
 
     return (
-        <div className="p-8 lg:p-10 h-full overflow-y-auto relative">
-            <div className="absolute top-0 right-0 w-64 h-64 bg-accent/5 rounded-full blur-3xl -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-            
+        <div className="p-8 lg:p-10 h-full overflow-y-auto relative bg-surface">
             <div className="mb-8 animate-fade-in relative z-10">
-                <h1 className="text-[22px] font-bold text-text-primary tracking-tight leading-tight">
+                <h1 className="text-[24px] font-bold text-text-primary tracking-tight leading-tight">
                     AI Project Cleaner
                 </h1>
                 <p className="text-[13px] text-text-secondary mt-1.5">
@@ -37,7 +35,7 @@ export default function Dashboard({ project, scanResult, onProjectSelected, onNa
             </div>
 
             {!project ? (
-                <div className="animate-fade-in glass-panel rounded-2xl p-8 max-w-md relative z-10">
+                <div className="animate-fade-in flat-panel p-8 max-w-md relative z-10">
                     <div className="flex items-start gap-3.5 mb-5">
                         <div className="w-10 h-10 rounded-xl bg-surface-overlay flex items-center justify-center flex-shrink-0">
                             <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" strokeWidth="1.3" className="text-text-muted">
@@ -55,14 +53,14 @@ export default function Dashboard({ project, scanResult, onProjectSelected, onNa
                     </div>
                     <button
                         onClick={handleSelectProject}
-                        className="px-4 py-2 bg-accent hover:bg-accent-hover active:scale-95 text-white text-[13px] font-medium rounded-lg transition-all duration-150 shadow-[0_1px_2px_rgba(79,125,249,0.25)] hover:shadow-[0_4px_12px_rgba(79,125,249,0.3)]"
+                        className="px-4 py-2 bg-text-primary hover:bg-accent-hover active:scale-95 text-surface text-[13px] font-medium rounded-md transition-all duration-150 shadow-sm"
                     >
                         Select Project
                     </button>
                 </div>
             ) : (
                 <div className="space-y-4 max-w-lg animate-fade-in relative z-10">
-                    <div className="glass-panel rounded-2xl overflow-hidden">
+                    <div className="flat-panel overflow-hidden">
                         <div className="px-6 py-5 border-b border-border/50 bg-surface/30">
                             <span className="text-[9.5px] font-bold uppercase tracking-[0.14em] text-text-muted/60">
                                 Project
@@ -103,13 +101,13 @@ export default function Dashboard({ project, scanResult, onProjectSelected, onNa
                         <div className="px-6 py-4 border-t border-border/40 flex items-center gap-2.5 bg-surface/40">
                             <button
                                 onClick={onNavigateToScan}
-                                className="px-4 py-2 bg-accent hover:bg-accent-hover active:scale-95 text-white text-[13px] font-medium rounded-lg transition-all duration-150 shadow-[0_1px_2px_rgba(79,125,249,0.25)]"
+                                className="px-4 py-2 bg-text-primary hover:bg-accent-hover active:scale-95 text-surface text-[13px] font-medium rounded-md transition-all duration-150 shadow-sm"
                             >
                                 {scanResult ? "View Results" : "Scan Project"}
                             </button>
                             <button
                                 onClick={handleSelectProject}
-                                className="px-4 py-2 border border-border/70 text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 text-[13px] font-medium rounded-lg transition-all duration-150"
+                                className="px-4 py-2 border border-border text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 text-[13px] font-medium rounded-md transition-all duration-150"
                             >
                                 Change
                             </button>
@@ -127,7 +125,7 @@ export default function Dashboard({ project, scanResult, onProjectSelected, onNa
                                 </div>
                             }
                             defaultExpanded={true}
-                            className="border-none shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05),0_1px_4px_-1px_rgba(0,0,0,0.03)]"
+                            className="border-none shadow-none"
                         >
                             <div className="px-6 py-5 bg-surface/30">
                                 <div className="grid grid-cols-3 gap-3 mb-5">
@@ -136,9 +134,9 @@ export default function Dashboard({ project, scanResult, onProjectSelected, onNa
                                         { label: "Issues", value: String(scanResult.cleanableCount), accent: true },
                                         { label: "Cleanable", value: formatSize(scanResult.cleanableSize), accent: true },
                                     ].map((item) => (
-                                        <div key={item.label} className="bg-surface-raised rounded-xl px-3.5 py-3 border border-border/30 shadow-sm">
+                                        <div key={item.label} className="bg-surface-raised rounded-lg px-3.5 py-3 border border-border">
                                             <span className="text-[9.5px] font-semibold uppercase tracking-[0.1em] text-text-muted/60 block">{item.label}</span>
-                                            <span className={`text-[16px] font-bold tracking-tight ${item.accent ? "text-accent drop-shadow-sm" : "text-text-primary"}`}>{item.value}</span>
+                                            <span className={`text-[16px] font-bold tracking-tight ${item.accent ? "text-success" : "text-text-primary"}`}>{item.value}</span>
                                         </div>
                                     ))}
                                 </div>

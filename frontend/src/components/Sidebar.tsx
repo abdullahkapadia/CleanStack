@@ -3,6 +3,7 @@ import { Page } from "../types";
 interface SidebarProps {
     activePage: Page;
     onNavigate: (page: Page) => void;
+    isOpen: boolean;
 }
 
 interface NavItem {
@@ -65,9 +66,9 @@ const navItems: NavItem[] = [
     },
 ];
 
-export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
+export default function Sidebar({ activePage, onNavigate, isOpen }: SidebarProps) {
     return (
-        <aside className="w-[200px] min-w-[200px] bg-surface-raised border-r border-border/60 flex flex-col shrink-0">
+        <aside className={`w-[260px] min-w-[260px] bg-surface-raised flex flex-col shrink-0 transition-all duration-300 ease-in-out relative z-20 ${isOpen ? "ml-0 opacity-100" : "-ml-[260px] opacity-0 pointer-events-none"}`}>
             <div className="px-4 pt-5 pb-2">
                 <span className="text-[10px] font-semibold uppercase tracking-[0.12em] text-text-muted/70">
                     Menu
@@ -80,9 +81,9 @@ export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
                         <button
                             key={item.id}
                             onClick={() => onNavigate(item.id)}
-                            className={`w-full flex items-center gap-2.5 px-3 py-[7px] rounded-[8px] text-[13px] font-medium transition-all duration-150 focus:outline-none animate-slide-in
+                            className={`w-full flex items-center gap-2.5 px-3 py-[7px] rounded-[6px] text-[13px] font-medium transition-all duration-150 focus:outline-none animate-slide-in
                                 ${isActive
-                                    ? "bg-accent text-white shadow-[0_1px_3px_rgba(79,125,249,0.3)]"
+                                    ? "bg-text-primary text-surface"
                                     : "text-text-secondary hover:text-text-primary hover:bg-surface-hover"
                                 }`}
                             style={{ animationDelay: `${idx * 30}ms` }}
@@ -93,7 +94,7 @@ export default function Sidebar({ activePage, onNavigate }: SidebarProps) {
                     );
                 })}
             </nav>
-            <div className="px-4 py-4 border-t border-border/40">
+            <div className="px-4 py-4 mt-auto">
                 <span className="text-[10px] text-text-muted/50 font-medium">v1.0.0-alpha</span>
             </div>
         </aside>

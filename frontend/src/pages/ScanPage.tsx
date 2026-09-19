@@ -59,9 +59,8 @@ export default function ScanPage({ project, scanResult, onScanComplete, onError 
         return (
             <div className="p-8 lg:p-10 h-full overflow-y-auto relative">
                 <PageHeader title="Scan" subtitle={`Analyzing ${project.name}...`} />
-                <div className="glass-panel rounded-2xl p-14 flex flex-col items-center justify-center max-w-lg animate-fade-in relative overflow-hidden">
-                    <div className="absolute inset-0 bg-gradient-to-br from-accent/5 to-transparent pointer-events-none" />
-                    <div className="w-8 h-8 border-[2.5px] border-surface-overlay border-t-accent rounded-full animate-spin mb-4 relative z-10" />
+                <div className="flat-panel p-14 flex flex-col items-center justify-center max-w-lg animate-fade-in relative overflow-hidden">
+                    <div className="w-8 h-8 border-[2.5px] border-surface-overlay border-t-text-primary rounded-full animate-spin mb-4 relative z-10" />
                     <p className="text-[13px] font-semibold text-text-primary mb-0.5 relative z-10">Scanning project...</p>
                     <p className="text-[11.5px] text-text-muted relative z-10">This may take a moment for large projects.</p>
                 </div>
@@ -73,9 +72,8 @@ export default function ScanPage({ project, scanResult, onScanComplete, onError 
         return (
             <div className="p-8 lg:p-10 h-full overflow-y-auto relative">
                 <PageHeader title="Scan" subtitle="Analyze your project for issues." />
-                <div className="glass-panel rounded-2xl max-w-lg overflow-hidden animate-fade-in relative">
-                    <div className="absolute top-0 right-0 w-32 h-32 bg-accent/5 rounded-full blur-2xl -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-                    <div className="px-6 py-5 border-b border-border/50 relative z-10">
+                <div className="flat-panel max-w-lg overflow-hidden animate-fade-in relative">
+                    <div className="px-6 py-5 border-b border-border relative z-10">
                         <span className="text-[9.5px] font-bold uppercase tracking-[0.14em] text-text-muted/60">Project</span>
                         <h2 className="text-[16px] font-bold text-text-primary mt-1 tracking-tight">{project.name}</h2>
                         <code className="text-[11px] text-text-muted font-mono mt-0.5 block">{project.path}</code>
@@ -87,7 +85,7 @@ export default function ScanPage({ project, scanResult, onScanComplete, onError 
                         </p>
                         <button
                             onClick={handleScan}
-                            className="px-4 py-2 bg-accent hover:bg-accent-hover active:scale-95 text-white text-[13px] font-medium rounded-lg transition-all duration-150 shadow-[0_1px_2px_rgba(79,125,249,0.25)] hover:shadow-[0_4px_12px_rgba(79,125,249,0.3)]"
+                            className="px-4 py-2 bg-text-primary hover:bg-accent-hover active:scale-95 text-surface text-[13px] font-medium rounded-md transition-all duration-150 shadow-sm"
                         >
                             Start Scan
                         </button>
@@ -112,7 +110,7 @@ export default function ScanPage({ project, scanResult, onScanComplete, onError 
                 </div>
                 <button
                     onClick={handleScan}
-                    className="px-3.5 py-[7px] border border-border/70 text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 text-[12.5px] font-medium rounded-lg transition-all duration-150"
+                    className="px-3.5 py-[7px] border border-border text-text-secondary hover:text-text-primary hover:bg-surface-hover active:scale-95 text-[12.5px] font-medium rounded-md transition-all duration-150"
                 >
                     Re-scan
                 </button>
@@ -125,11 +123,11 @@ export default function ScanPage({ project, scanResult, onScanComplete, onError 
                     { label: "Issues Found", value: String(scanResult.cleanableCount), accent: scanResult.cleanableCount > 0 },
                     { label: "Cleanable", value: formatSize(scanResult.cleanableSize), accent: scanResult.cleanableSize > 0 },
                 ].map((card) => (
-                    <div key={card.label} className="glass-panel rounded-xl p-4">
+                    <div key={card.label} className="flat-panel p-4">
                         <span className="text-[9.5px] font-semibold uppercase tracking-[0.1em] text-text-muted/60 block mb-0.5">
                             {card.label}
                         </span>
-                        <span className={`text-[18px] font-bold tracking-tight ${card.accent ? "text-accent drop-shadow-sm" : "text-text-primary"}`}>
+                        <span className={`text-[18px] font-bold tracking-tight ${card.accent ? "text-success" : "text-text-primary"}`}>
                             {card.value}
                         </span>
                     </div>
@@ -138,9 +136,9 @@ export default function ScanPage({ project, scanResult, onScanComplete, onError 
 
             {aiInsight && (
                 <div className="mb-6 max-w-4xl animate-fade-in relative z-10" style={{ animationDelay: "75ms" }}>
-                    <div className="glass-panel rounded-2xl p-5 border-l-4 border-l-accent shadow-[0_2px_10px_-2px_rgba(79,125,249,0.15)] bg-gradient-to-r from-accent/5 to-transparent">
+                    <div className="flat-panel p-5 border-l-4 border-l-success bg-surface-raised">
                         <div className="flex items-start gap-3">
-                            <div className="w-8 h-8 rounded-full bg-accent/10 flex items-center justify-center flex-shrink-0 text-accent">
+                            <div className="w-8 h-8 rounded-md bg-success/10 flex items-center justify-center flex-shrink-0 text-success">
                                 ✨
                             </div>
                             <div>
@@ -264,10 +262,10 @@ function FilterPill({ active, onClick, label }: { active: boolean; onClick: () =
     return (
         <button
             onClick={onClick}
-            className={`px-3 py-[6px] rounded-full text-[11.5px] font-medium transition-all duration-200 focus:outline-none active:scale-95
+            className={`px-3 py-[6px] rounded-md text-[11.5px] font-medium transition-all duration-200 focus:outline-none active:scale-95
                 ${active
-                    ? "bg-text-primary text-surface shadow-md"
-                    : "bg-surface-raised text-text-secondary hover:text-text-primary hover:shadow-sm border border-border/50"
+                    ? "bg-text-primary text-surface shadow-sm"
+                    : "bg-surface-raised text-text-secondary hover:text-text-primary hover:shadow-sm border border-border"
                 }`}
         >
             {label}

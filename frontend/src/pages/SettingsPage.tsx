@@ -20,16 +20,16 @@ export default function SettingsPage() {
                         </div>
                     }
                     defaultExpanded={true}
-                    className="border-none shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05),0_1px_4px_-1px_rgba(0,0,0,0.03)]"
+                    className="border border-border shadow-sm"
                 >
-                    <div className="px-6 divide-y divide-border/30 bg-surface/30">
+                    <div className="px-6 divide-y divide-border bg-surface">
                         <div className="flex items-center justify-between py-4 group">
                             <div>
                                 <span className="text-[13px] font-medium text-text-primary block group-hover:text-accent transition-colors">Theme</span>
                                 <span className="text-[11.5px] text-text-muted mt-0.5 block">Application color scheme</span>
                             </div>
-                            <span className="text-[12px] text-text-secondary px-3 py-1 bg-surface-raised rounded-lg font-medium border border-border/50 shadow-sm">
-                                Light (Premium)
+                            <span className="text-[12px] text-text-secondary px-3 py-1 bg-surface-raised rounded-md font-medium border border-border shadow-sm">
+                                Light (ChatGPT)
                             </span>
                         </div>
                         <div className="flex items-center justify-between py-4 group">
@@ -56,16 +56,16 @@ export default function SettingsPage() {
                         </div>
                     }
                     defaultExpanded={true}
-                    className="border-none shadow-[0_2px_8px_-2px_rgba(0,0,0,0.05),0_1px_4px_-1px_rgba(0,0,0,0.03)]"
+                    className="border border-border shadow-sm"
                 >
-                    <div className="px-6 py-5 bg-surface/30">
+                    <div className="px-6 py-5 bg-surface">
                         <p className="text-[12.5px] text-text-secondary leading-relaxed mb-4">
                             AI Project Cleaner analyzes software projects to identify unnecessary files,
                             potential security issues, unused dependencies, and other project-health problems.
                         </p>
                         <div className="flex flex-wrap gap-2">
                             {['Go', 'Wails', 'React', 'TypeScript', 'Tailwind'].map(tech => (
-                                <span key={tech} className="px-2.5 py-1 bg-surface-raised border border-border/40 rounded-md text-[11px] text-text-muted font-medium">
+                                <span key={tech} className="px-2.5 py-1 bg-surface-raised border border-border rounded-md text-[11px] text-text-muted font-medium">
                                     {tech}
                                 </span>
                             ))}

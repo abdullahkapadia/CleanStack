@@ -1,25 +1,25 @@
 @import "tailwindcss";
 
 @theme {
-    --color-surface: #fafbfc;
-    --color-surface-raised: #ffffff;
-    --color-surface-overlay: #f1f3f5;
-    --color-surface-hover: #eceef1;
-    --color-surface-active: #e4e7eb;
-    --color-border: #dfe3e8;
-    --color-border-subtle: #eef0f2;
-    --color-text-primary: #1a1d21;
-    --color-text-secondary: #5c6370;
-    --color-text-muted: #a0a6b1;
-    --color-accent: #4f7df9;
-    --color-accent-hover: #3d6ae8;
-    --color-accent-subtle: rgba(79, 125, 249, 0.07);
-    --color-success: #34c772;
-    --color-success-subtle: rgba(52, 199, 114, 0.07);
+    --color-surface: #ffffff;
+    --color-surface-raised: #f9f6f0;
+    --color-surface-overlay: #ececf1;
+    --color-surface-hover: #e5e5ea;
+    --color-surface-active: #d1d1d6;
+    --color-border: #e5e5ea;
+    --color-border-subtle: #f0f0f0;
+    --color-text-primary: #202123;
+    --color-text-secondary: #6e6e80;
+    --color-text-muted: #8e8ea0;
+    --color-accent: #202123;
+    --color-accent-hover: #343541;
+    --color-accent-subtle: rgba(32, 33, 35, 0.05);
+    --color-success: #10a37f;
+    --color-success-subtle: rgba(16, 163, 127, 0.1);
     --color-warning: #f5a623;
     --color-warning-subtle: rgba(245, 166, 35, 0.07);
-    --color-danger: #e8445a;
-    --color-danger-subtle: rgba(232, 68, 90, 0.07);
+    --color-danger: #ef4444;
+    --color-danger-subtle: rgba(239, 68, 68, 0.07);
     --font-sans: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, sans-serif;
     --font-mono: "SF Mono", "Fira Code", "JetBrains Mono", Consolas, monospace;
 }
@@ -124,17 +124,8 @@ html, body {
     animation: accordionUp 0.2s ease-out;
 }
 
-.glass-panel {
-    background: rgba(255, 255, 255, 0.7);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.5);
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
-}
-
-.glass-panel-darker {
-    background: rgba(240, 242, 245, 0.6);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(255, 255, 255, 0.4);
+.flat-panel {
+    background: var(--color-surface-raised);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
 }

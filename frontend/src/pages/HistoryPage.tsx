@@ -43,7 +43,7 @@ export default function HistoryPage() {
     }
 
     return (
-        <div className="p-8 lg:p-10 h-full overflow-y-auto relative flex flex-col">
+        <div className="p-8 lg:p-10 h-full overflow-y-auto relative flex flex-col bg-surface">
             <div className="mb-6 animate-fade-in relative z-10 flex items-start justify-between">
                 <div>
                     <h1 className="text-[22px] font-bold text-text-primary tracking-tight leading-tight">History</h1>
@@ -63,7 +63,7 @@ export default function HistoryPage() {
             </div>
 
             {history.length === 0 ? (
-                <div className="border border-border/60 border-dashed rounded-2xl p-14 flex flex-col items-center justify-center max-w-lg animate-fade-in relative z-10">
+                <div className="flat-panel p-14 flex flex-col items-center justify-center max-w-lg animate-fade-in relative z-10">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" className="text-text-muted/50 mb-3">
                         <circle cx="14" cy="14" r="10.5" />
                         <path d="M14 7v7l4.5 4.5" strokeLinecap="round" strokeLinejoin="round" />
@@ -78,9 +78,9 @@ export default function HistoryPage() {
                     {history.map((item, idx) => {
                         const isScan = item.actionType === "scan";
                         return (
-                            <div key={item.id || idx} className="glass-panel rounded-2xl p-5 flex items-start gap-4">
+                            <div key={item.id || idx} className="flat-panel p-5 flex items-start gap-4">
                                 <div 
-                                    className={`w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0 mt-0.5
+                                    className={`w-9 h-9 rounded-md flex items-center justify-center flex-shrink-0 mt-0.5
                                         ${isScan ? "bg-accent/10 text-accent" : "bg-danger/10 text-danger"}`}
                                 >
                                     {isScan ? (
@@ -103,7 +103,7 @@ export default function HistoryPage() {
                                                 {item.projectName}
                                             </span>
                                         </h3>
-                                        <span className="text-[11px] text-text-muted font-medium bg-surface/50 px-2 py-1 rounded-md">
+                                        <span className="text-[11px] text-text-muted font-medium bg-surface-raised px-2 py-1 rounded-md border border-border">
                                             {formatDate(item.timestamp)}
                                         </span>
                                     </div>

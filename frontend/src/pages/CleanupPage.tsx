@@ -61,14 +61,14 @@ export default function CleanupPage({ project, scanResult, onCleanupComplete, on
 
     if (!project || !scanResult) {
         return (
-            <div className="p-8 lg:p-10 h-full overflow-y-auto relative">
+            <div className="p-8 lg:p-10 h-full overflow-y-auto relative bg-surface">
                 <div className="mb-6 animate-fade-in relative z-10">
                     <h1 className="text-[22px] font-bold text-text-primary tracking-tight leading-tight">Cleanup</h1>
                     <p className="text-[13px] text-text-secondary mt-1">Remove unnecessary files and dependencies.</p>
                 </div>
                 
                 {successMessage ? (
-                    <div className="border border-success/30 rounded-2xl p-14 flex flex-col items-center justify-center max-w-lg bg-success-subtle/20 animate-fade-in relative z-10">
+                    <div className="flat-panel p-14 flex flex-col items-center justify-center max-w-lg bg-success-subtle/20 animate-fade-in relative z-10">
                         <div className="w-12 h-12 rounded-full bg-success/10 text-success flex items-center justify-center mb-4">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <polyline points="20 6 9 17 4 12" />
@@ -78,7 +78,7 @@ export default function CleanupPage({ project, scanResult, onCleanupComplete, on
                         <p className="text-[12.5px] text-text-secondary text-center leading-relaxed">{successMessage}</p>
                     </div>
                 ) : (
-                    <div className="border border-border/60 border-dashed rounded-2xl p-14 flex flex-col items-center justify-center max-w-lg animate-fade-in relative z-10">
+                    <div className="flat-panel p-14 flex flex-col items-center justify-center max-w-lg animate-fade-in relative z-10">
                         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" stroke="currentColor" strokeWidth="1.3" className="text-text-muted/50 mb-3">
                             <path d="M6 9h16M10 9V7a1.5 1.5 0 011.5-1.5h5A1.5 1.5 0 0118 7v2M12 13v7M16 13v7" strokeLinecap="round" strokeLinejoin="round" />
                             <path d="M7.5 9l1 14a2.5 2.5 0 002.5 2.5h6a2.5 2.5 0 002.5-2.5l1-14" strokeLinecap="round" strokeLinejoin="round" />
@@ -98,7 +98,7 @@ export default function CleanupPage({ project, scanResult, onCleanupComplete, on
         .reduce((sum, i) => sum + i.size, 0);
 
     return (
-        <div className="p-8 lg:p-10 h-full overflow-y-auto relative flex flex-col">
+        <div className="p-8 lg:p-10 h-full overflow-y-auto relative flex flex-col bg-surface">
             <div className="mb-6 animate-fade-in relative z-10 flex items-start justify-between flex-shrink-0">
                 <div>
                     <h1 className="text-[22px] font-bold text-text-primary tracking-tight leading-tight">Cleanup</h1>
@@ -113,7 +113,7 @@ export default function CleanupPage({ project, scanResult, onCleanupComplete, on
                     <button
                         onClick={handleCleanup}
                         disabled={selectedPaths.size === 0 || cleaning}
-                        className={`px-5 py-2 text-white text-[13px] font-medium rounded-lg transition-all duration-150 shadow-[0_1px_2px_rgba(239,68,68,0.25)] flex items-center gap-2
+                        className={`px-5 py-2 text-surface text-[13px] font-medium rounded-md transition-all duration-150 shadow-sm flex items-center gap-2
                             ${selectedPaths.size === 0 || cleaning 
                                 ? "bg-text-muted cursor-not-allowed shadow-none" 
                                 : "bg-danger hover:bg-danger/90 active:scale-95"}`}
@@ -136,8 +136,8 @@ export default function CleanupPage({ project, scanResult, onCleanupComplete, on
                 </div>
             </div>
 
-            <div className="glass-panel rounded-2xl overflow-hidden flex flex-col flex-1 min-h-[300px] animate-fade-in relative z-10 shadow-sm border border-border/50">
-                <div className="px-5 py-3 border-b border-border/40 bg-surface/80 flex items-center gap-4">
+            <div className="flat-panel overflow-hidden flex flex-col flex-1 min-h-[300px] animate-fade-in relative z-10">
+                <div className="px-5 py-3 border-b border-border bg-surface flex items-center gap-4">
                     <label className="flex items-center gap-3 cursor-pointer">
                         <input 
                             type="checkbox" 
